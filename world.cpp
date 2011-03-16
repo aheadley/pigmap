@@ -92,6 +92,10 @@ bool makeAllRegionsRequired(const string& topdir, ChunkTable& chunktable, TileTa
 				vector<TileIdx> tiles = chunk->getTiles(mp);
 				for (vector<TileIdx>::const_iterator tile = tiles.begin(); tile != tiles.end(); tile++)
 				{
+					// BEGIN SPECIAL
+					if (!tile->valid(mp))
+						continue;
+					// END SPECIAL
 					// first check if this tile fits in the TileTable, whose size is fixed
 					PosTileIdx pti(*tile);
 					if (pti.valid())
@@ -181,6 +185,10 @@ int readRegionlist(const string& regionlist, const string& inputdir, ChunkTable&
 				vector<TileIdx> tiles = chunk->getTiles(mp);
 				for (vector<TileIdx>::const_iterator tile = tiles.begin(); tile != tiles.end(); tile++)
 				{
+					// BEGIN SPECIAL
+					if (!tile->valid(mp))
+						continue;
+					// END SPECIAL
 					PosTileIdx pti(*tile);
 					if (pti.valid())
 						tiletable.setRequired(pti);
@@ -249,6 +257,10 @@ bool makeAllChunksRequired(const string& topdir, ChunkTable& chunktable, TileTab
 					vector<TileIdx> tiles = ci.getTiles(mp);
 					for (vector<TileIdx>::const_iterator tile = tiles.begin(); tile != tiles.end(); tile++)
 					{
+						// BEGIN SPECIAL
+						if (!tile->valid(mp))
+							continue;
+						// END SPECIAL
 						// first check if this tile fits in the TileTable, whose size is fixed
 						PosTileIdx pti(*tile);
 						if (pti.valid())
@@ -317,6 +329,10 @@ int readChunklist(const string& chunklist, ChunkTable& chunktable, TileTable& ti
 			vector<TileIdx> tiles = ci.getTiles(mp);
 			for (vector<TileIdx>::const_iterator tile = tiles.begin(); tile != tiles.end(); tile++)
 			{
+				// BEGIN SPECIAL
+				if (!tile->valid(mp))
+					continue;
+				// END SPECIAL
 				PosTileIdx pti(*tile);
 				if (pti.valid())
 					tiletable.setRequired(pti);
